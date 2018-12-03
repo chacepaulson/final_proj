@@ -1,7 +1,6 @@
 # import unemployment data 
 library(readxl)
 unemployment <- read_excel("~/Downloads/final_proj/raw_data/unemployment.xlsx")
-View(unemployment)
 
 # renaming columns 
 unemployment <- unemployment %>% 
