@@ -17,4 +17,3 @@ poli_freedom <- poli_freedom %>%
 small_poli <- data.frame("country_name" = poli_freedom$country_name, 
                          "poli_freedom" = poli_freedom$poli_freedom)
 
-

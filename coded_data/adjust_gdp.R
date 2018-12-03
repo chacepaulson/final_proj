@@ -23,7 +23,7 @@ gdp_mixed <- merge(sovereign_nations, gdp, all.x = TRUE)
 sum(is.na(gdp_mixed$`2017`))
 gdp_mixed$country_name[is.na(gdp_mixed$`2017`)]
 
-# create a column of gdp_total 
+# create a column of gdp_total to combine other years in to 
 gdp_mixed$gdp_total <- gdp_mixed$`2017`
 
 # for the countries with NAs for 2017, we will take data from 2016 instead
