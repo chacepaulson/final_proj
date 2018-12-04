@@ -24,8 +24,11 @@ success_data <- merge(success_data, small_unemployment, all.x = TRUE)
 # merge in the literacy data 
 success_data <- merge(success_data, small_literacy, all.x = TRUE)
 
-# merge in the literacy data 
+# merge in the median income data 
 success_data <- merge(success_data, small_median_income, all.x = TRUE)
+
+# merge in the life expectancy data 
+sucess_data <- merge(success_data, small_life, all.x = TRUE)
 
 # merge in the infant mortality data 
 sucess_data <- merge(success_data, small_infant, all.x = TRUE)
