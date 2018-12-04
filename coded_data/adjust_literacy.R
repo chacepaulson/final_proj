@@ -67,3 +67,9 @@ literacy_mixed$literacy_total[is.na(literacy_mixed$literacy_total)] <-
   as.character(literacy_mixed$`2008`[is.na(literacy_mixed$literacy_total)])
 sum(is.na(literacy_mixed$literacy_total))
 
+# repeat but using 2007 data
+literacy_mixed$literacy_total[is.na(literacy_mixed$literacy_total)] <- 
+  as.character(literacy_mixed$`2007`[is.na(literacy_mixed$literacy_total)])
+sum(is.na(literacy_mixed$literacy_total))
+
+
