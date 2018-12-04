@@ -27,6 +27,7 @@ happiness$happiness_rating <-
 # merge with sovereign nations to keep only desired nations
 happiness_mixed <- merge(sovereign_nations, happiness, all.x = TRUE)
 
-# test for NAs
+# test for NAs 
 sum(is.na(happiness_mixed))
+happiness_mixed$country_name[is.na(happiness_mixed$happiness_rating)]
 

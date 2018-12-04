@@ -20,3 +20,9 @@ success_data <- merge(success_data, small_gdp, all.x = TRUE)
 
 # merge in the unemployment data 
 success_data <- merge(success_data, small_unemployment, all.x = TRUE)
+
+# merge in the literacy data 
+success_data <- merge(success_data, small_literacy, all.x = TRUE)
+
+# merge in the happiness data 
+success_data <- merge(success_data, happiness_mixed, all.x = TRUE)

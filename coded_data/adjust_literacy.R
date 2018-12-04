@@ -72,4 +72,46 @@ literacy_mixed$literacy_total[is.na(literacy_mixed$literacy_total)] <-
   as.character(literacy_mixed$`2007`[is.na(literacy_mixed$literacy_total)])
 sum(is.na(literacy_mixed$literacy_total))
 
+# repeat but using 2006 data
+literacy_mixed$literacy_total[is.na(literacy_mixed$literacy_total)] <- 
+  as.character(literacy_mixed$`2006`[is.na(literacy_mixed$literacy_total)])
+sum(is.na(literacy_mixed$literacy_total))
+
+# repeat but using 2005 data
+literacy_mixed$literacy_total[is.na(literacy_mixed$literacy_total)] <- 
+  as.character(literacy_mixed$`2005`[is.na(literacy_mixed$literacy_total)])
+sum(is.na(literacy_mixed$literacy_total))
+
+# repeat but using 2004 data
+literacy_mixed$literacy_total[is.na(literacy_mixed$literacy_total)] <- 
+  as.character(literacy_mixed$`2004`[is.na(literacy_mixed$literacy_total)])
+sum(is.na(literacy_mixed$literacy_total))
+
+# repeat but using 2003 data
+literacy_mixed$literacy_total[is.na(literacy_mixed$literacy_total)] <- 
+  as.character(literacy_mixed$`2003`[is.na(literacy_mixed$literacy_total)])
+sum(is.na(literacy_mixed$literacy_total))
+
+# repeat but using 2002 data
+literacy_mixed$literacy_total[is.na(literacy_mixed$literacy_total)] <- 
+  as.character(literacy_mixed$`2002`[is.na(literacy_mixed$literacy_total)])
+sum(is.na(literacy_mixed$literacy_total))
+
+# repeat but using 2001 data
+literacy_mixed$literacy_total[is.na(literacy_mixed$literacy_total)] <- 
+  as.character(literacy_mixed$`2001`[is.na(literacy_mixed$literacy_total)])
+sum(is.na(literacy_mixed$literacy_total))
+
+# repeat but using 2000 data
+literacy_mixed$literacy_total[is.na(literacy_mixed$literacy_total)] <- 
+  as.character(literacy_mixed$`2000`[is.na(literacy_mixed$literacy_total)])
+sum(is.na(literacy_mixed$literacy_total))
+
+# find out what countries are still missing gdp data
+literacy_mixed$country_name[is.na(literacy_mixed$literacy_total)]
+
+# create smaller data set with only the gdp_total and country_names columns
+small_literacy <- data.frame("country_name" = literacy_mixed$country_name, 
+                        "literacy" = literacy_mixed$literacy_total)
+
 
