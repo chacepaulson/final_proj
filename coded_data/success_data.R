@@ -52,3 +52,50 @@ ncol(success_data)
 # ensure data is in a tibble and not a data frame
 success_data <- as.tibble(success_data)
 
+# find the types for each column 
+typeof(success_data$econ_freedom)
+typeof(success_data$poli_freedom)
+typeof(success_data$gdp)
+typeof(success_data$unemployment)
+typeof(success_data$crime_index)
+typeof(success_data$homicide)
+typeof(success_data$enrollment)
+typeof(success_data$literacy)
+typeof(success_data$life_expectancy)
+typeof(success_data$infant_mortality)
+typeof(success_data$median_income)
+typeof(success_data$happiness_rating)
+
+# convert the character strings into numeric 
+success_data$econ_freedom <- 
+  as.numeric(as.character(success_data$econ_freedom))
+success_data$gdp <- 
+  as.numeric(as.character(success_data$gdp))
+success_data$homicide <- 
+  as.numeric(as.character(success_data$homicide))
+success_data$enrollment <- 
+  as.numeric(as.character(success_data$enrollment))
+success_data$literacy <- 
+  as.numeric(as.character(success_data$literacy))
+success_data$life_expectancy <- 
+  as.numeric(as.character(success_data$life_expectancy))
+success_data$infant_mortality <- 
+  as.numeric(as.character(success_data$infant_mortality))
+success_data$median_income <- 
+  as.numeric(as.character(success_data$median_income))
+success_data$happiness_rating <- 
+  as.numeric(as.character(success_data$happiness_rating))
+
+# check to ensure that all columns are now doubles
+typeof(success_data$econ_freedom)
+typeof(success_data$poli_freedom)
+typeof(success_data$gdp)
+typeof(success_data$unemployment)
+typeof(success_data$crime_index)
+typeof(success_data$homicide)
+typeof(success_data$enrollment)
+typeof(success_data$literacy)
+typeof(success_data$life_expectancy)
+typeof(success_data$infant_mortality)
+typeof(success_data$median_income)
+typeof(success_data$happiness_rating)
