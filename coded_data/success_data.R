@@ -26,7 +26,8 @@ success_data <- merge(success_data, small_unemployment, all.x = TRUE)
 # merge in homicide data 
 success_data <- merge(sucess_data, small_homicide, all.x = TRUE)
 
-# merge in high school data
+# merge in high school enrollment data
+success_data <- merge(success_data, small_enrollment, all.x = TRUE)
 
 # merge in the literacy data 
 success_data <- merge(success_data, small_literacy, all.x = TRUE)

@@ -5,7 +5,7 @@ homicide <- read_excel("~/Downloads/final_proj/raw_data/homicide_rates.xlsx")
 library(tidyverse)
 homicide <- as_tibble(homicide)
 
-# renaming columns in median income data 
+# renaming columns in homicide data 
 colnames(homicide)
 homicide <- homicide %>% 
   rename(country_name = `Country Name`)
