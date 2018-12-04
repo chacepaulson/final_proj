@@ -51,4 +51,4 @@ colnames(econ_freedom)
 
 small_econ <- data.frame("country_name" = econ_freedom$country_name,
                          "region" = econ_freedom$region,
-                         "econ_freddom" = econ_freedom$total_score)
+                         "econ_freedom" = econ_freedom$total_score)

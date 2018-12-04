@@ -45,3 +45,10 @@ success_data <- merge(success_data, small_median_income, all.x = TRUE)
 # merge in the happiness data 
 success_data <- merge(success_data, happiness_mixed, all.x = TRUE)
 
+# check to make sure all columns have been inputted
+colnames(success_data)
+ncol(success_data)
+
+# turn data frame into tibble
+success_data <- as.tibble(success_data)
+

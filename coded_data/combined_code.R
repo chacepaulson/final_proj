@@ -90,7 +90,7 @@ colnames(econ_freedom)
 
 small_econ <- data.frame("country_name" = econ_freedom$country_name,
                          "region" = econ_freedom$region,
-                         "econ_freddom" = econ_freedom$total_score)
+                         "econ_freedom" = econ_freedom$total_score)
 
 # GDP ---------------------------------------------------------------------
 
@@ -758,8 +758,12 @@ success_data <- merge(success_data, small_median_income, all.x = TRUE)
 # merge in the happiness data 
 success_data <- merge(success_data, happiness_mixed, all.x = TRUE)
 
+# check to make sure all columns have been inputted
+colnames(success_data)
+ncol(success_data)
 
-
+# turn data frame into tibble
+success_data <- as.tibble(success_data)
 
 
 
