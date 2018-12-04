@@ -49,6 +49,11 @@ fixed_literacy <- tibble("country_name" = literacy$country_name,
                              "female" = literacy5$female, 
                              "note" = literacy$note)
 
+# remove percent sign from data 
+fixed_literacy$total <- 
+  substr(fixed_literacy$total, 1, 
+         nchar(fixed_literacy$total)-1)
+
 # merge with sovereign nations to keep only desired nations
 literacy_mixed <- merge(sovereign_nations, fixed_literacy, all.x = TRUE)
 
@@ -59,3 +64,4 @@ literacy_mixed$country_name[is.na(literacy_mixed$total)]
 # create smaller tibble keeping only country_name and literacy
 small_literacy2 <- tibble("country_name" = literacy_mixed$country_name, 
                            "literacy" = literacy_mixed$total)
+
