@@ -61,5 +61,5 @@ sum(is.na(gdp_mixed$gdp_total))
 gdp_mixed$country_name[is.na(gdp_mixed$gdp_total)]
 
 # create smaller data set with only the gdp_total and country_names columns
-small_gdp <- data.frame("country_name" = gdp_mixed$country_name, 
+small_gdp <- tibble("country_name" = gdp_mixed$country_name, 
                          "gdp" = gdp_mixed$gdp_total)

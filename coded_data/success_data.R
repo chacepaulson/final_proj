@@ -49,6 +49,6 @@ success_data <- merge(success_data, happiness_mixed, all.x = TRUE)
 colnames(success_data)
 ncol(success_data)
 
-# turn data frame into tibble
+# ensure data is in a tibble and not a data frame
 success_data <- as.tibble(success_data)
 

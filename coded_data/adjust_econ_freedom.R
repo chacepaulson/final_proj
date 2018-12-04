@@ -49,6 +49,6 @@ colnames(econ_freedom)
 
 # create second data set only with columns we care about 
 
-small_econ <- data.frame("country_name" = econ_freedom$country_name,
+small_econ <- tibble("country_name" = econ_freedom$country_name,
                          "region" = econ_freedom$region,
                          "econ_freedom" = econ_freedom$total_score)

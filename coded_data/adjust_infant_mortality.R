@@ -43,5 +43,5 @@ sum(is.na(infant_mixed$infant_mortality))
 infant_mixed$country_name[is.na(infant_mixed$infant_mortality)]
 
 # create smaller tibble keeping only country_name and infant_mortality 
-small_infant <- data.frame("country_name" = infant_mixed$country_name, 
+small_infant <- tibble("country_name" = infant_mixed$country_name, 
                            "infant_mortality" = infant_mixed$infant_mortality)

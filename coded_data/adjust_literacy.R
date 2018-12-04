@@ -112,7 +112,7 @@ sum(is.na(literacy_mixed$literacy_total))
 literacy_mixed$country_name[is.na(literacy_mixed$literacy_total)]
 
 # create smaller data set with only the literacy_total and country_names columns
-small_literacy <- data.frame("country_name" = literacy_mixed$country_name, 
+small_literacy <- tibble("country_name" = literacy_mixed$country_name, 
                         "literacy" = literacy_mixed$literacy_total)
 
 

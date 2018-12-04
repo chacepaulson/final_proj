@@ -16,6 +16,6 @@ poli_freedom <- poli_freedom %>%
   )
 
 # create second data set only with columns we care about 
-small_poli <- data.frame("country_name" = poli_freedom$country_name, 
+small_poli <- tibble("country_name" = poli_freedom$country_name, 
                          "poli_freedom" = poli_freedom$poli_freedom)
 

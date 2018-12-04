@@ -73,5 +73,5 @@ sum(is.na(median_mixed$median_total))
 median_mixed$country_name[is.na(median_mixed$median_total)]
 
 # create smaller data set with only the median_total and country_names columns
-small_median_income <- data.frame("country_name" = median_mixed$country_name, 
+small_median_income <- tibble("country_name" = median_mixed$country_name, 
                         "median_income" = median_mixed$median_total)

@@ -32,7 +32,7 @@ poli_freedom <- poli_freedom %>%
   )
 
 # create second data set only with columns we care about 
-small_poli <- data.frame("country_name" = poli_freedom$country_name, 
+small_poli <- tibble("country_name" = poli_freedom$country_name, 
                          "poli_freedom" = poli_freedom$poli_freedom)
 
 # Economic Freedom --------------------------------------------------------
@@ -88,7 +88,7 @@ colnames(econ_freedom)
 
 # create second data set only with columns we care about 
 
-small_econ <- data.frame("country_name" = econ_freedom$country_name,
+small_econ <- tibble("country_name" = econ_freedom$country_name,
                          "region" = econ_freedom$region,
                          "econ_freedom" = econ_freedom$total_score)
 
@@ -157,7 +157,7 @@ sum(is.na(gdp_mixed$gdp_total))
 gdp_mixed$country_name[is.na(gdp_mixed$gdp_total)]
 
 # create smaller data set with only the gdp_total and country_names columns
-small_gdp <- data.frame("country_name" = gdp_mixed$country_name, 
+small_gdp <- tibble("country_name" = gdp_mixed$country_name, 
                         "gdp" = gdp_mixed$gdp_total)
 
 # Unemployment Rate -------------------------------------------------------
@@ -173,7 +173,7 @@ unemployment <- unemployment %>%
          date = `Date of Info`)
 
 # create small data set with just country_name and unemployment rate
-small_unemployment <- data.frame("country_name" = unemployment$country_name, 
+small_unemployment <- tibble("country_name" = unemployment$country_name, 
                                  "unemployment" = unemployment$unemployment_rate)
 
 # Crime Index -------------------------------------------------------------
@@ -202,7 +202,7 @@ sum(is.na(crime_mixed$crime_index))
 crime_mixed$country_name[is.na(crime_mixed$crime_index)]
 
 # create smaller tibble keeping only country_name and literacy
-small_crime <- data.frame("country_name" = crime_mixed$country_name, 
+small_crime <- tibble("country_name" = crime_mixed$country_name, 
                           "crime_index" = crime_mixed$crime_index)
 
 # Homicide Rate -----------------------------------------------------------
@@ -302,7 +302,7 @@ sum(is.na(homicide_mixed$homicide_total))
 homicide_mixed$country_name[is.na(homicide_mixed$homicide_total)]
 
 # create smaller data set with only the homicide_total and country_names columns
-small_homicide <- data.frame("country_name" = homicide_mixed$country_name, 
+small_homicide <- tibble("country_name" = homicide_mixed$country_name, 
                              "homicide" = homicide_mixed$homicide_total)
 
 # Secondary School Enrollment Rate ----------------------------------------
@@ -426,7 +426,7 @@ sum(is.na(enrollment_mixed$enrollment_total))
 enrollment_mixed$country_name[is.na(enrollment_mixed$enrollment_total)]
 
 # create smaller data set with only the enrollment_total and country_names columns
-small_enrollment <- data.frame("country_name" = enrollment_mixed$country_name, 
+small_enrollment <- tibble("country_name" = enrollment_mixed$country_name, 
                                "enrollment" = enrollment_mixed$enrollment_total)
 
 # Literacy Rate -----------------------------------------------------------
@@ -474,7 +474,7 @@ literacy5 %<>%
   rename(female = `V2`)
 
 # create new data frame with only the columns of interest
-fixed_literacy <- data.frame("country_name" = literacy$country_name, 
+fixed_literacy <- tibble("country_name" = literacy$country_name, 
                              "definition" = literacy2$definition, 
                              "total" = literacy3$total, 
                              "male" = literacy4$male, 
@@ -490,7 +490,7 @@ sum(is.na(literacy_mixed$total))
 literacy_mixed$country_name[is.na(literacy_mixed$total)]
 
 # create smaller tibble keeping only country_name and literacy
-small_literacy2 <- data.frame("country_name" = literacy_mixed$country_name, 
+small_literacy2 <- tibble("country_name" = literacy_mixed$country_name, 
                               "literacy" = literacy_mixed$total)
 
 # Life Expectancy Rate ----------------------------------------------------
@@ -540,7 +540,7 @@ sum(is.na(life_mixed$life_expectancy))
 life_mixed$country_name[is.na(life_mixed$life_expectancy)]
 
 # create smaller tibble keeping only country_name and life_expectancy 
-small_life <- data.frame("country_name" = life_mixed$country_name, 
+small_life <- tibble("country_name" = life_mixed$country_name, 
                          "life_expectancy" = life_mixed$life_expectancy)
 
 # Infant Mortality Rate ---------------------------------------------------
@@ -590,7 +590,7 @@ sum(is.na(infant_mixed$infant_mortality))
 infant_mixed$country_name[is.na(infant_mixed$infant_mortality)]
 
 # create smaller tibble keeping only country_name and infant_mortality 
-small_infant <- data.frame("country_name" = infant_mixed$country_name, 
+small_infant <- tibble("country_name" = infant_mixed$country_name, 
                            "infant_mortality" = infant_mixed$infant_mortality)
 
 # Median Income -----------------------------------------------------------
@@ -670,7 +670,7 @@ sum(is.na(median_mixed$median_total))
 median_mixed$country_name[is.na(median_mixed$median_total)]
 
 # create smaller data set with only the median_total and country_names columns
-small_median_income <- data.frame("country_name" = median_mixed$country_name, 
+small_median_income <- tibble("country_name" = median_mixed$country_name, 
                                   "median_income" = median_mixed$median_total)
 
 # World Happiness Rating --------------------------------------------------

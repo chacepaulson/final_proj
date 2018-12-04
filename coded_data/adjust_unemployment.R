@@ -9,5 +9,5 @@ unemployment <- unemployment %>%
          date = `Date of Info`)
 
 # create small data set with just country_name and unemployment rate
-small_unemployment <- data.frame("country_name" = unemployment$country_name, 
+small_unemployment <- tibble("country_name" = unemployment$country_name, 
                          "unemployment" = unemployment$unemployment_rate)

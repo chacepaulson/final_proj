@@ -93,5 +93,5 @@ sum(is.na(homicide_mixed$homicide_total))
 homicide_mixed$country_name[is.na(homicide_mixed$homicide_total)]
 
 # create smaller data set with only the homicide_total and country_names columns
-small_homicide <- data.frame("country_name" = homicide_mixed$country_name, 
+small_homicide <- tibble("country_name" = homicide_mixed$country_name, 
                              "homicide" = homicide_mixed$homicide_total)

@@ -117,7 +117,7 @@ sum(is.na(enrollment_mixed$enrollment_total))
 enrollment_mixed$country_name[is.na(enrollment_mixed$enrollment_total)]
 
 # create smaller data set with only the enrollment_total and country_names columns
-small_enrollment <- data.frame("country_name" = enrollment_mixed$country_name, 
+small_enrollment <- tibble("country_name" = enrollment_mixed$country_name, 
                              "enrollment" = enrollment_mixed$enrollment_total)
 
 

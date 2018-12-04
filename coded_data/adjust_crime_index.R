@@ -22,6 +22,6 @@ sum(is.na(crime_mixed$crime_index))
 crime_mixed$country_name[is.na(crime_mixed$crime_index)]
 
 # create smaller tibble keeping only country_name and literacy
-small_crime <- data.frame("country_name" = crime_mixed$country_name, 
+small_crime <- tibble("country_name" = crime_mixed$country_name, 
                           "crime_index" = crime_mixed$crime_index)
 

@@ -41,14 +41,13 @@ literacy4 %<>%
 literacy5 %<>% 
   rename(female = `V2`)
 
-# create new data frame with only the columns of interest
-fixed_literacy <- data.frame("country_name" = literacy$country_name, 
+# create new tibble with only the columns of interest
+fixed_literacy <- tibble("country_name" = literacy$country_name, 
                              "definition" = literacy2$definition, 
                              "total" = literacy3$total, 
                              "male" = literacy4$male, 
                              "female" = literacy5$female, 
                              "note" = literacy$note)
-fixed_literacy <- as.tibble(fixed_literacy)
 
 # merge with sovereign nations to keep only desired nations
 literacy_mixed <- merge(sovereign_nations, fixed_literacy, all.x = TRUE)
@@ -58,5 +57,5 @@ sum(is.na(literacy_mixed$total))
 literacy_mixed$country_name[is.na(literacy_mixed$total)]
 
 # create smaller tibble keeping only country_name and literacy
-small_literacy2 <- data.frame("country_name" = literacy_mixed$country_name, 
+small_literacy2 <- tibble("country_name" = literacy_mixed$country_name, 
                            "literacy" = literacy_mixed$total)
