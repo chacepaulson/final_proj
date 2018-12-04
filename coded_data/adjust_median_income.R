@@ -1,9 +1,11 @@
-# loading gdp data 
+# loading median income data 
 library(readxl)
 median_income <- read_excel("~/Downloads/final_proj/raw_data/median_income.xlsx")
+
+library(tidyverse)
 median_income <- as_tibble(median_income)
 
-# renaming columns in gdp data 
+# renaming columns in median income data 
 colnames(median_income)
 median_income <- median_income %>% 
   rename(country_name = `Country Name`)
@@ -67,9 +69,9 @@ sum(is.na(median_mixed$median_total))
 
 # since we continue to having a total of 20 NAs, we will stop here
 
-# find out what countries are still missing gdp data
+# find out what countries are still missing median income data
 median_mixed$country_name[is.na(median_mixed$median_total)]
 
-# create smaller data set with only the gdp_total and country_names columns
+# create smaller data set with only the median_total and country_names columns
 small_median_income <- data.frame("country_name" = median_mixed$country_name, 
                         "median_income" = median_mixed$median_total)

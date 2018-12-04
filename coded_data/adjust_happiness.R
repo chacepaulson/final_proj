@@ -1,4 +1,4 @@
-# import literacy rates data set 
+# import happiness data set 
 library(readxl)
 happiness <- read_excel("~/Downloads/final_proj/raw_data/world_happiness_rating.xlsx")
 

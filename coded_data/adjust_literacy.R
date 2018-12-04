@@ -107,10 +107,10 @@ literacy_mixed$literacy_total[is.na(literacy_mixed$literacy_total)] <-
   as.character(literacy_mixed$`2000`[is.na(literacy_mixed$literacy_total)])
 sum(is.na(literacy_mixed$literacy_total))
 
-# find out what countries are still missing gdp data
+# find out what countries are still missing literacy data
 literacy_mixed$country_name[is.na(literacy_mixed$literacy_total)]
 
-# create smaller data set with only the gdp_total and country_names columns
+# create smaller data set with only the literacy_total and country_names columns
 small_literacy <- data.frame("country_name" = literacy_mixed$country_name, 
                         "literacy" = literacy_mixed$literacy_total)
 
