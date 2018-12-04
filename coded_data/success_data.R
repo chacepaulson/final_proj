@@ -22,6 +22,7 @@ success_data <- merge(success_data, small_gdp, all.x = TRUE)
 success_data <- merge(success_data, small_unemployment, all.x = TRUE)
 
 # merge in crime rate data
+success_data <- merge(success_data, small_crime, all.x = TRUE)
 
 # merge in homicide data 
 success_data <- merge(sucess_data, small_homicide, all.x = TRUE)
