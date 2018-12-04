@@ -30,7 +30,7 @@ success_data <- merge(sucess_data, small_homicide, all.x = TRUE)
 success_data <- merge(success_data, small_enrollment, all.x = TRUE)
 
 # merge in the literacy data 
-success_data <- merge(success_data, small_literacy, all.x = TRUE)
+success_data <- merge(success_data, small_literacy2, all.x = TRUE)
 
 # merge in the life expectancy data 
 sucess_data <- merge(success_data, small_life, all.x = TRUE)
