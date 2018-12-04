@@ -89,9 +89,9 @@ sum(is.na(homicide_mixed$homicide_total))
 
 # since we continue to having a total of 3 NAs, we will stop here
 
-# find out what countries are still missing median income data
+# find out what countries are still missing homicide data
 homicide_mixed$country_name[is.na(homicide_mixed$homicide_total)]
 
-# create smaller data set with only the median_total and country_names columns
+# create smaller data set with only the homicide_total and country_names columns
 small_homicide <- data.frame("country_name" = homicide_mixed$country_name, 
                              "homicide" = homicide_mixed$homicide_total)

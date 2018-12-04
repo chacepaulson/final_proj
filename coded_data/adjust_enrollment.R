@@ -109,10 +109,10 @@ sum(is.na(enrollment_mixed$enrollment_total))
 
 # since we continue to having a total of 11 NAs, we will stop here
 
-# find out what countries are still missing median income data
+# find out what countries are still missing enrollment data
 enrollment_mixed$country_name[is.na(enrollment_mixed$enrollment_total)]
 
-# create smaller data set with only the median_total and country_names columns
+# create smaller data set with only the enrollment_total and country_names columns
 small_enrollment <- data.frame("country_name" = enrollment_mixed$country_name, 
                              "enrollment" = enrollment_mixed$enrollment_total)
 

@@ -5,6 +5,7 @@ infant_mortality <- read_excel("~/Downloads/final_proj/raw_data/infant_mortality
 library(tidyverse)
 infant_mortality <- as_tibble(infant_mortality)
 
+# rename columns in the data set
 library(magrittr)
 colnames(infant_mortality)
 infant_mortality <- infant_mortality %>% 

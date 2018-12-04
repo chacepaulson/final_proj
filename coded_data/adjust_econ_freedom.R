@@ -1,12 +1,12 @@
 # Load economic freedom data 
-# will need library(readxl)
-
+library(readxl)
 econ_freedom <- read_excel("~/Downloads/final_proj/raw_data/econ_freedom.xls")
+
+library(tidyverse)
 econ_freedom <- as_tibble(econ_freedom)
 colnames(econ_freedom)
 
 # Rename columns in economic freedom data 
-
 econ_freedom <- econ_freedom %>% 
   rename(
     countryID = `CountryID`, 

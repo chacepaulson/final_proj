@@ -57,6 +57,6 @@ literacy_mixed <- merge(sovereign_nations, fixed_literacy, all.x = TRUE)
 sum(is.na(literacy_mixed$total))
 literacy_mixed$country_name[is.na(literacy_mixed$total)]
 
-# create smaller tibble keeping only country_name and literact
+# create smaller tibble keeping only country_name and literacy
 small_literacy2 <- data.frame("country_name" = literacy_mixed$country_name, 
                            "literacy" = literacy_mixed$total)

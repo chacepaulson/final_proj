@@ -5,6 +5,7 @@ happiness <- read_excel("~/Downloads/final_proj/raw_data/world_happiness_rating.
 library(tidyverse)
 happiness <- as_tibble(happiness)
 
+# rename columns in the data set
 library(magrittr)
 colnames(happiness)
 happiness <- happiness %>% 

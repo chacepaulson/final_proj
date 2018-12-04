@@ -1,6 +1,8 @@
 # loading gdp data 
 library(readxl)
 gdp <- read_excel("~/Downloads/final_proj/raw_data/gdp.xlsx")
+
+library(tidyverse)
 gdp <- as_tibble(gdp)
 
 # renaming columns in gdp data 

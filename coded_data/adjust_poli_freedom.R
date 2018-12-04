@@ -1,6 +1,8 @@
 # load political freedom data 
 library(readxl)
 poli_freedom <- read_excel("~/Downloads/final_proj/raw_data/poli_freedom.xlsx")
+
+library(tidyverse)
 poli_freedom <- as_tibble(poli_freedom)
 
 # rename columns in political freedom data 

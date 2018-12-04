@@ -5,6 +5,7 @@ literacy <- read_excel("~/Downloads/final_proj/raw_data/literacy_rates.xlsx")
 library(tidyverse)
 literacy <- as_tibble(literacy)
 
+# rename columns in the data set
 library(magrittr)
 colnames(literacy)
 literacy <- literacy %>% 

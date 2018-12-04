@@ -5,7 +5,7 @@ life_expectancy <- read_excel("~/Downloads/final_proj/raw_data/life_expectancy.x
 library(tidyverse)
 life_expectancy <- as_tibble(life_expectancy)
 
-# rename columns
+# rename columns in the data set
 library(magrittr)
 colnames(life_expectancy)
 life_expectancy <- life_expectancy %>% 
