@@ -109,7 +109,11 @@ sum(is.na(enrollment_mixed$enrollment_total))
 
 # since we continue to having a total of 11 NAs, we will stop here
 
+# merge with sovereign nations to keep only desired nations
+enrollment_mixed <- merge(sovereign_nations, enrollment_mixed, all.x = TRUE)
+
 # find out what countries are still missing enrollment data
+sum(is.na(enrollment_mixed$enrollment_total))
 enrollment_mixed$country_name[is.na(enrollment_mixed$enrollment_total)]
 
 # create smaller data set with only the enrollment_total and country_names columns
