@@ -25,7 +25,7 @@ success_data <- merge(success_data, small_unemployment, all.x = TRUE)
 success_data <- merge(success_data, small_crime, all.x = TRUE)
 
 # merge in homicide data 
-success_data <- merge(sucess_data, small_homicide, all.x = TRUE)
+success_data <- merge(success_data, small_homicide, all.x = TRUE)
 
 # merge in high school enrollment data
 success_data <- merge(success_data, small_enrollment, all.x = TRUE)
@@ -34,13 +34,14 @@ success_data <- merge(success_data, small_enrollment, all.x = TRUE)
 success_data <- merge(success_data, small_literacy2, all.x = TRUE)
 
 # merge in the life expectancy data 
-sucess_data <- merge(success_data, small_life, all.x = TRUE)
+success_data <- merge(success_data, small_life, all.x = TRUE)
 
 # merge in the infant mortality data 
-sucess_data <- merge(success_data, small_infant, all.x = TRUE)
+success_data <- merge(success_data, small_infant, all.x = TRUE)
 
 # merge in the median income data 
 success_data <- merge(success_data, small_median_income, all.x = TRUE)
 
 # merge in the happiness data 
 success_data <- merge(success_data, happiness_mixed, all.x = TRUE)
+
