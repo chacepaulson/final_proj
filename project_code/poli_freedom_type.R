@@ -28,4 +28,9 @@ df_poli <- tibble("type" = c("NF", "PF", "F"),
                   "mean" = c(mean_nf, mean_pf, mean_f))
 
 
+# most free ---------------------------------------------------------------
+success_poli <- success_poli %>% 
+  arrange(desc(success))
+success_poli$rank <- 1:196
+
 
