@@ -15,7 +15,7 @@ mean_am <-
   mean(success_na$success[success_na$region == "Americas"], na.rm = TRUE)
 
 # create a tibble of values
-df_region <- tibble("type" = c("Asia-Pacific", "Europe", 
+df_region <- tibble("region" = c("Asia-Pacific", "Europe", 
                                "Middle East / North Africa", 
                                "Sub-Saharan Africa", "Americas"), 
                   "mean" = c(mean_ap, mean_eu, mean_mena, mean_ssa, mean_am))
