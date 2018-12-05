@@ -25,3 +25,6 @@ success_combine$health <-
 # lifestyle
 success_combine$life <- 
   rowMeans(success_na[,c("median_income", "happiness")], na.rm=TRUE)
+
+# add success calculations back 
+success_combine$success <- success_na$success
