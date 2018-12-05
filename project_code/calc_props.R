@@ -46,10 +46,10 @@ calc_mean <- c(mean(xsuc1), mean(xsuc2), mean(xsuc3),
 calc_mean
 
 # create tibbles with proportions
-mean_poli_prop <- 
+mean_econ_prop <- 
   tibble("prop_success" = c("0.70 - 0.75", "0.75 - 0.80", "0.80 - 0.85", 
                             "0.85 - 0.90", "0.90 - 0.95", "0.95 - 1.0"),
          "mean_success" = calc_mean)
-mean_poli_prop
+mean_econ_prop
 
 
