@@ -28,3 +28,9 @@ success_combine$life <-
 
 # add success calculations back 
 success_combine$success <- success_na$success
+
+# find the least successful countries
+success_bot3 <- success_combine %>% top_n(-10)
+
+# find the most successful countries
+success_top3 <- success_combine %>% top_n(10)
