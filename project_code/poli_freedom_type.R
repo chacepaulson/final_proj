@@ -12,7 +12,9 @@ success_poli <- merge(sovereign_nations, small_poli2, all.x = TRUE)
 
 
 # Combine with Success ----------------------------------------------------
-success_poli$success <- success_pct$success
+small_success <- tibble("country_name" = success_na$country_name, 
+                        "success" = success_na$success)
+success_poli <- merge(small_success, success_poli, all.x = TRUE)
 
 
 # calculate means by type -------------------------------------------------
@@ -31,7 +33,7 @@ df_poli <- tibble("type" = c("NF", "PF", "F"),
 # most free ---------------------------------------------------------------
 success_poli <- success_poli %>% 
   arrange(desc(success))
-success_poli$rank <- 1:196
+success_poli$rank <- 1:179
 
 # calculate lm 
 lm(success ~ poli_status, data = success_poli)
