@@ -1,3 +1,21 @@
+# basic statistics --------------------------------------------------------
+mean(success_na$success) 
+# 0.6117207
+
+min(success_na$success) 
+# 0.3012778
+
+success_na %>% top_n(-1) 
+# South Sudan
+
+max(success_na$success) 
+# 0.9071793
+
+success_na %>% top_n(1) 
+# Tawain 
+
+# find rank ---------------------------------------------------------------
+
 # arrange data by success
 success_order <- success_na %>% 
   arrange(desc(success))
