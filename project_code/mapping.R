@@ -50,3 +50,35 @@ sMap <- joinCountryData2Map(sDF, joinCode = "ISO3",
 # create map
 mapCountryData(malMap, nameColumnToPlot="success", catMethod = "quantiles",
                missingCountryCol = gray(.8), mapTitle = "Success of Nations")
+
+
+# repeat for poli freedom  ------------------------------------------------
+
+# data frame with success and country code
+pDF <- data.frame(country = success_code$code, 
+                  success = success_code$poli_freedom)
+
+# join data frame to map
+pMap <- joinCountryData2Map(pDF, joinCode = "ISO3",
+                            nameJoinColumn = "country")
+
+# create map
+mapCountryData(malMap, nameColumnToPlot="success", catMethod = "quantiles",
+               missingCountryCol = gray(.8), mapTitle = "Poli Freedom of Nations")
+
+
+# repeat for econ freedom -------------------------------------------------
+
+# data frame with success and country code
+eDF <- data.frame(country = success_code$code, 
+                  success = success_code$econ_freedom)
+
+# join data frame to map
+eMap <- joinCountryData2Map(eDF, joinCode = "ISO3",
+                            nameJoinColumn = "country")
+
+# create map
+mapCountryData(malMap, nameColumnToPlot="success", catMethod = "quantiles",
+               missingCountryCol = gray(.8), mapTitle = "Econ Freedom of Nations")
+
+
