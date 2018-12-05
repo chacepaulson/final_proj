@@ -33,4 +33,7 @@ success_poli <- success_poli %>%
   arrange(desc(success))
 success_poli$rank <- 1:196
 
+# calculate lm 
+lm(success ~ poli_status, data = success_poli)
+
 

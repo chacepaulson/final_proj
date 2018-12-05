@@ -48,7 +48,7 @@ sMap <- joinCountryData2Map(sDF, joinCode = "ISO3",
                               nameJoinColumn = "country")
 
 # create map
-mapCountryData(malMap, nameColumnToPlot="success", catMethod = "quantiles",
+mapCountryData(sMap, nameColumnToPlot="success", catMethod = "quantiles",
                missingCountryCol = gray(.8), mapTitle = "Success of Nations")
 
 
@@ -63,7 +63,7 @@ pMap <- joinCountryData2Map(pDF, joinCode = "ISO3",
                             nameJoinColumn = "country")
 
 # create map
-mapCountryData(malMap, nameColumnToPlot="success", catMethod = "quantiles",
+mapCountryData(pMap, nameColumnToPlot="success", catMethod = "quantiles",
                missingCountryCol = gray(.8), mapTitle = "Poli Freedom of Nations")
 
 
@@ -78,7 +78,17 @@ eMap <- joinCountryData2Map(eDF, joinCode = "ISO3",
                             nameJoinColumn = "country")
 
 # create map
-mapCountryData(malMap, nameColumnToPlot="success", catMethod = "quantiles",
+mapCountryData(eMap, nameColumnToPlot="success", catMethod = "quantiles",
                missingCountryCol = gray(.8), mapTitle = "Econ Freedom of Nations")
 
+# maps without legends
+mapCountryData(sMap, nameColumnToPlot="success", catMethod = "quantiles",
+               missingCountryCol = gray(.8), mapTitle = "Success of Nations", 
+               addLegend = FALSE)
+mapCountryData(pMap, nameColumnToPlot="success", catMethod = "quantiles",
+               missingCountryCol = gray(.8), mapTitle = "Poli Freedom of Nations", 
+               addLegend = FALSE)
+mapCountryData(eMap, nameColumnToPlot="success", catMethod = "quantiles",
+               missingCountryCol = gray(.8), mapTitle = "Econ Freedom of Nations", 
+               addLegend = FALSE)
 
