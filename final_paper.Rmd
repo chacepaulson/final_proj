@@ -1339,9 +1339,15 @@ success_bot3
 
 The first topic of note when considering the least successful nation is the lack of diversity in the regions represented. Only two regions - Sub-Saharan Africa and Asia-Pacific - appear in the bottom top nations whereas four different regions appeared in the top ten. 
 
-The mean rate of economic freedom for the bottom ten is 0.5257, compared to the mean economic freedom overall for the whole set which is 0.6126. The mean rate of political freedom for the bottom ten is 0.27, compared the mean political freedom overall which is 0.5809. 
+The mean rate of economic freedom for the bottom ten is 0.5257, compared to the mean economic freedom overall for the whole set which is 0.6126. The mean rate of political freedom for the bottom ten is 0.27, compared the mean political freedom overall which is 0.5809. As was the trend with the top ten, there is significantly less fluctation in the economic freedom in the bottom ten countries than there is within the political freedom rating. While almost all the values in both columns stayed consistently below the means for political and economic freedom, political freedom had one outlier that managed to surpass the mean - Burkina Faso. 
 
 # Political Freedom and Success
+
+Under the initial research design for this paper, the goal was the track which economic systems and types of government saw the highest/lowest rates of success. While there was no readily available data set of economic systems outside of the economic freedom ratings, there was an alternative data set to political freedom that would have provided types of government, including autocracy, closed anocracy, open anocracy, democracy, and full democracy. This data set, however, included fewer nations within its study than Freedom House's Freedom Index. 
+
+Further, while the categories provided by the polity data sets would have been ideal (i.e. the types of government), the each type of government only fell into one range of polity scores, with no outliers in the set. This meant that an autocracy would only fall between the polity score range of -10 to -6, closed anocracy between the range of -5 and -1, etc. Thus, little was gained from this model when these artifical ranges could also be introduced into Freedom House's Freedom Index. Since the Freedom Index included more nations, this seemed like the clear option. 
+
+Below is the tibble created with proportional ranges and success scores. Each propoortional range represents a section of political freedom (i.e. a political freedom rating between 0 to 0.1, 0.1 to 0.2, etc.) and its corresponding average of success.
 
 ```{r echo=FALSE, results='hide',message=FALSE, warning=FALSE}
 # calculate means of proportions ------------------------------------------
@@ -1372,11 +1378,35 @@ mean_poli_prop <-
                             "0.6 - 0.7", "0.7 - 0.8", "0.8 - 0.9",
                             "0.9 - 1.0"),
          "mean_success" = calc_mean)
+
+lm_poli_f <- lm(success ~ poli_freedom, data = success_na)
 ```
 
 ```{r}
 mean_poli_prop
 ```
+
+As can be seen in the above tibble, the average success rating rises consistently along with the political freedom with no outliers. Considering this under the terms of the afformentioned polity scores, then, this would mean that the success rating would rise as the polity score rose, leaving the democracies as the most successful type of government and the autocracy as the least successful. 
+
+## Correlation between Political Freedom and Success
+
+Turning the attention, then, towards the statistical relationship between political freedom and success, we will start by analyzing a linear regression graph of the two. 
+
+```{r}
+ggplot(data = success_na) + 
+  geom_point(mapping = aes(x = poli_freedom, y = success)) +
+  geom_abline()
+```
+
+As the graph shows, there is a positive correlation between political freedom and success; however, the data is much more scattered compared to the later graphing of economic freedom and success. 
+
+Below is the linear regression equation for political freedom and success:
+
+```{r}
+lm_poli_f
+```
+
+A futher calculation of linear regression reveals that while the relationship between political freedom and success is statistically significant (with a p value of 8.067e-11), the correlation between the two is much weaker than that of economic freedom and success, with a  correlation coefficient of only 0.1692. This means that when the political freedom rating is at 100, the success rate of a nation will only rise (on average) 16.92 points. 
 
 # Economic Freedom and Success
 
@@ -1401,10 +1431,23 @@ mean_econ_prop <-
   tibble("prop_success" = c("0.70 - 0.75", "0.75 - 0.80", "0.80 - 0.85", 
                             "0.85 - 0.90", "0.90 - 0.95", "0.95 - 1.0"),
          "mean_success" = calc_mean)
+lm_econ_f <- lm(success ~ econ_freedom, data = success_na)
 ```
 
 ```{r}
 mean_econ_prop
+```
+
+## Correlation between Economic Freedom and Success
+
+```{r}
+ggplot(data = success_na) + 
+  geom_point(mapping = aes(x = econ_freedom, y = success)) +
+  geom_abline()
+```
+
+```{r}
+lm_econ_f
 ```
 
 # Overall Correlation between Freedom Type and Success
@@ -1551,7 +1594,7 @@ Further limitations of the data may be the way by which success was measured. Wh
 
 # Conculsion
 
-The United States has a tendency to assume that the political freedom of a nation factors much more heavily into the success of a nation than it actually does. While 
+The United States has a tendency to assume that the political freedom of a nation factors much more heavily into the success of a nation than it actually does. While the country gained its freedom by battling a monarchy and has gone to war over its perceived "noble" goal of spreading democracy throughout the world, this study provides some evidence that political freedom within a country may not be as important as other factors. While democracies do hold higher success ratings than other types of government, political freedom is not the deciding factor between a successful nation and a failing one. Among the most successful nations in the world, political freedom was largely mixed - instead, it was the economic freedom that factored much mor heavily into their success. With such a high correlation between economic freedom and success, attention should perhaps be turned away from promotting political freedom and instead towards promoting economic freedom. 
 
 # Sources 
 
