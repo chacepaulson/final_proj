@@ -1091,6 +1091,9 @@ success_code <- success_code %>%
 success_code <- merge(success_code, my_countries, all.x = TRUE)
 ```
 
+## Success Ratings 
+
+The following map depicts the success within each given nation, with the darker shades showing the more successful free nations and the lighter showing the less free:
 ```{r echo=FALSE}
 # create map --------------------------------------------------------------
 library(rworldmap)
@@ -1109,8 +1112,12 @@ sMap <- joinCountryData2Map(sDF, joinCode = "ISO3",
 # create map
 mapCountryData(sMap, nameColumnToPlot="success", catMethod = "quantiles",
                missingCountryCol = gray(.8), mapTitle = "Success of Nations")
+```
 
+## Political Freedom
 
+The following map depicts the political freedom within each given nation, with the darker shades showing the more politically free nations and the lighter showing the less free:
+```{r echo=FALSE}
 # repeat for poli freedom  ------------------------------------------------
 
 # data frame with success and country code
@@ -1124,8 +1131,12 @@ pMap <- joinCountryData2Map(pDF, joinCode = "ISO3",
 # create map
 mapCountryData(pMap, nameColumnToPlot="success", catMethod = "quantiles",
                missingCountryCol = gray(.8), mapTitle = "Poli Freedom of Nations")
+```
 
+## Economic Freedom
 
+The following map depicts the economic freedom within each given nation, with the darker shades showing the more economically free nations and the lighter showing the less free:
+```{r echo=FALSE}
 # repeat for econ freedom -------------------------------------------------
 
 # data frame with success and country code
@@ -1141,13 +1152,18 @@ mapCountryData(eMap, nameColumnToPlot="success", catMethod = "quantiles",
                missingCountryCol = gray(.8), mapTitle = "Econ Freedom of Nations")
 ```
 
-# Most Successful Nations 
+## Comparing the Three 
 
+When comparing the three maps to one another, it becomes clear that the three models rate the regions of the world very differently. Success favors rates the Asia-Pacific region more favorably then either political freedom or economic freedom does. Additionally, success's rating of South America falls much more in line with the political freedom model than economic freedom. Lastly, both political and economic freedom rate the southern region of Africa more favorably than the success rate model does. 
 
-
-# Least Successful Nations 
 
 # Success by Region 
+
+The following section investigates this topic further by tracking the numerical differences in success between the regions in the three models. 
+
+## Political Freedom 
+
+Under the political freedom model, the most successful region is Europe with an average freedom rating of 0.812 out of 1.0 and the least successful region is the Middle East / North Africa with an average freedom rating of 0.288. The following tibble includes the mean political freedom rating for each of the five regions. 
 
 ```{r echo=FALSE, results='hide',message=FALSE, warning=FALSE}
 # region data 
@@ -1177,6 +1193,10 @@ df_region_poli <- tibble("region" = c("Asia-Pacific", "Europe",
 df_region_poli
 ```
 
+## Economic Freedom 
+
+Under the economic freedom model, the most successful region is Europe with an average freedom rating of 0.689 out of 1.0 and the least successful region is Sub-Saharan Africa with an average rating of 0.546. As is evidenced by the following tibble that includes the mean economic freedom ratings for each of the five regions, there is much less variation between the regions than there is under the other two models:
+
 ```{r echo=FALSE, results='hide',message=FALSE, warning=FALSE}
 # region data 
 colnames(success_na)
@@ -1203,6 +1223,10 @@ df_region_econ <- tibble("region" = c("Asia-Pacific", "Europe",
 ```{r}
 df_region_econ
 ```
+
+## Success Rating 
+
+Under the success model, the most successful region is, again, Europe with an average rating of 0.711 out of 1.0 and the least successful region is Sub-Saharan Africa with an average rating of 0.491. The following tibble includes the mean success ratings for each of the five regions: 
 
 ```{r echo=FALSE, results='hide',message=FALSE, warning=FALSE}
 # region data 
@@ -1231,6 +1255,17 @@ df_region <- tibble("region" = c("Asia-Pacific", "Europe",
 ```{r}
 df_region
 ```
+
+## Comparing the Three 
+
+Under all three models, Europe is consistently the region with the highest average score - making it the most politically/economically free as well as the most successful. There is somewhat more variation in the lowest average scores. Sub-Saharan Africa is the least economically free and least successful while the Middle East / North Africa is the least politically free.  
+
+# Most Successful Nations 
+
+
+
+# Least Successful Nations 
+
 
 # Political Freedom and Success
 
@@ -1300,6 +1335,8 @@ mean_econ_prop
 
 # Overall Correlation between Freedom Type and Success
 
+In order to calculate the correlation between economic freedom, political freedom, and success within the same model, a multiple linear regression test will be utilized. 
+
 ```{r echo=FALSE, results='hide',message=FALSE, warning=FALSE}
 lm_both <- lm(success ~ econ_freedom + poli_freedom, data = success_na)
 ```
@@ -1308,8 +1345,13 @@ lm_both <- lm(success ~ econ_freedom + poli_freedom, data = success_na)
 lm_both
 ```
 
+As the outcome of the linear regression shows, economic freedom has a much stronger correlation to the success of a nation than political freedom does. An economic freedom rating of 100 percent will increase a nation's success rating by 62.008 percent whereas a political freedom rating of 100 percent will only increase a nation's success rating by 4.259 percent. 
 
 # Determing the Effect of the Economic Prosperity Indicators 
+
+When calculating the economic freedom of the country, the Heritage foundation utilized both the GDP and unemployments rates in their calculations. Since both of these variables were utilized in the calculation of success as indicators of economic prosperity, it is important to run a second linear regression to test the correlation between success and freedom rates with these two variables removed. 
+
+The second multiple linear regression considers only the remaining four categories - safety, education, health, and lifestyle - when calculating the success of a given country:
 
 ```{r echo=FALSE, results='hide',message=FALSE, warning=FALSE}
 # calculating success without economic indicators 
@@ -1395,8 +1437,6 @@ success_four <- success_pct
 colnames(success_pct)
 
 success_four <- 
-  success_four[rowSums(is.na(success_four[c("gdp", "unemployment")])) != 2, ]
-success_four <- 
   success_four[rowSums(is.na(success_four[c("crime_index", "homicide")])) != 2, ]
 success_four <- 
   success_four[rowSums(is.na(success_four[c("enrollment", "literacy")])) != 2, ]
@@ -1412,8 +1452,19 @@ nrow(success_four)
 # the success score 
 
 lm_both_four <- lm(success ~ econ_freedom + poli_freedom, data = success_four)
+
+lm_five <- lm(success ~ econ + safe + educ + health + life, 
+              data = success_combine)
 ```
 
 ```{r}
 lm_both_four
+```
+
+Given that the correlation coefficients for economic freedom and political freedom remain the same (0.62008 and 0.04259, respectively) even when the economic prosperity category has been removed from consideration, we have ensured that the correlation was not skewed in favor of economic freedom by sharing two of the same indicators.  
+
+When testing the correlation between the five indicators and the success rate for a nation, the results show that health indicators had the strongest correlation with a nation's success while economic factors had the weakest correlation. Thus, it is less surprising that the removal of the economic prosperty category had no effect on the overall correlation between economic freedom/political freedom and success. 
+
+```{r}
+lm_five
 ```
