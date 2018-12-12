@@ -1104,7 +1104,8 @@ success_code <- merge(success_code, my_countries, all.x = TRUE)
 ## Success Ratings 
 
 The following map depicts the success within each given nation, with the darker shades showing the more successful free nations and the lighter showing the less free:
-```{r echo=FALSE}
+
+```{r echo=FALSE,results='hide',fig.keep='all'}
 # create map --------------------------------------------------------------
 library(rworldmap)
 
@@ -1127,7 +1128,8 @@ mapCountryData(sMap, nameColumnToPlot="success", catMethod = "quantiles",
 ## Political Freedom
 
 The following map depicts the political freedom within each given nation, with the darker shades showing the more politically free nations and the lighter showing the less free:
-```{r echo=FALSE}
+
+```{r echo=FALSE,results='hide',fig.keep='all'}
 # repeat for poli freedom  ------------------------------------------------
 
 # data frame with success and country code
@@ -1146,7 +1148,9 @@ mapCountryData(pMap, nameColumnToPlot="success", catMethod = "quantiles",
 ## Economic Freedom
 
 The following map depicts the economic freedom within each given nation, with the darker shades showing the more economically free nations and the lighter showing the less free:
-```{r echo=FALSE}
+
+```{r echo=FALSE,results='hide',fig.keep='all'}
+knitr::opts_chunk$set(fig.width=12, fig.height=8)
 # repeat for econ freedom -------------------------------------------------
 
 # data frame with success and country code
