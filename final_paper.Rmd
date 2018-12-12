@@ -979,6 +979,51 @@ success_bot3 <- success_combine %>% top_n(-10)
 success_top3 <- success_combine %>% top_n(10)
 
 
+# basic statistics --------------------------------------------------------
+mean(success_na$success) 
+# 0.6117207
+
+min(success_na$success) 
+# 0.3012778
+
+success_na %>% top_n(-1) 
+# South Sudan
+
+max(success_na$success) 
+# 0.9071793
+
+success_na %>% top_n(1) 
+# Tawain 
+
+# find rank ---------------------------------------------------------------
+
+# arrange data by success
+success_order <- success_na %>% 
+  arrange(desc(success))
+nrow(success_order)
+success_order$rank <- 1:179
+
+# find the least successful countries
+success_bot <- success_na %>% top_n(-10)
+
+# find the most successful countries
+success_top <- success_na %>% top_n(10)
+
+# create tibbles keeping only countries and success scores
+success_bot2 <- tibble("country" = success_bot$country_name, 
+                       "success" = success_bot$success)
+success_top2 <- tibble("country" = success_top$country_name, 
+                       "success" = success_top$success)
+
+# create tibbles keeping only countries and freedom/success scores
+success_bot3 <- tibble("country" = success_bot$country_name, 
+                       "econ" = success_bot$econ_freedom, 
+                       "poli" = success_bot$poli_freedom,
+                       "success" = success_bot$success)
+success_top3 <- tibble("country" = success_top$country_name, 
+                       "econ" = success_top$econ_freedom, 
+                       "poli" = success_top$poli_freedom, 
+                       "success" = success_top$success)
 ```
 
 # Research Question 
@@ -989,7 +1034,9 @@ The paper will first detail which nations are ranked highest/lowest in terms of 
 
 # Background
 
-# Calculating Success 
+For the research, two data sets 
+
+# Defining Success 
 
 In order to calculate the success of a nation, the term "success" must first be defined. For the sake of the following research, a successful nation has been defined as one that has attained high levels of economic prosperity, education, safety, and health among its population as well as an overall positive quality of life. When combined, these five categories should work together to create a successful citizenry and nation. 
 
@@ -997,6 +1044,321 @@ In order to measure the categories, then, two variables have been assigned to ea
 
 By including five different categories and weighting them evenly, the risk of preferential treatment towards one category will be removed. In many previous studies of the success of countries, research focused solely on economic factors (or weighted them heavier than other variables). However, under this current study, the goal is to gain a more robust picture of what success means and looks like for a nation; thus, it becomes necessary to weight economic prosperity the same as the remaining four categories. 
 
+# Calculating Success 
+
+To calculate success, proportions were calculated for each of the ten variables. 
+
 ```{r}
 head(success_na)
+```
+
+# Comparing Economic/Political Freedom and Success 
+
+```{r echo=FALSE, results='hide',message=FALSE, warning=FALSE}
+# loading country code data 
+library(readxl)
+country_code <- read_excel("~/Downloads/final_proj/raw_data/country_code.xlsx")
+
+library(tidyverse)
+country_code <- as_tibble(country_code)
+colnames(country_code)
+
+# clean up data
+country_code <- str_split_fixed(country_code$code, " ", 2)
+country_code <- as.tibble(country_code)
+colnames(country_code)
+country_code <- country_code %>% 
+  rename(code = `V1`, 
+         country = `V2`)
+colnames(country_code)
+
+# trim the leading white spaces off of the columns
+head(infant2)
+country_code$country <- trimws(country_code$country)
+country_code$code <- trimws(country_code$code)
+
+# merge country_code with countries from study 
+my_countries <- tibble("country" = success_na$country_name)
+my_countries$country <- trimws(my_countries$country)
+
+my_countries <- merge(my_countries, country_code, all.x = TRUE)
+
+# merge my_countries with success data
+success_code <- success_na
+success_code <- success_code %>% 
+  rename(country = country_name)
+
+success_code <- merge(success_code, my_countries, all.x = TRUE)
+```
+
+```{r echo=FALSE}
+# create map --------------------------------------------------------------
+library(rworldmap)
+
+# countries data frame 
+theCountries <- success_code$code
+
+# data frame with success and country code
+sDF <- data.frame(country = success_code$code, 
+                    success = success_code$success)
+
+# join data frame to map
+sMap <- joinCountryData2Map(sDF, joinCode = "ISO3",
+                              nameJoinColumn = "country")
+
+# create map
+mapCountryData(sMap, nameColumnToPlot="success", catMethod = "quantiles",
+               missingCountryCol = gray(.8), mapTitle = "Success of Nations")
+
+
+# repeat for poli freedom  ------------------------------------------------
+
+# data frame with success and country code
+pDF <- data.frame(country = success_code$code, 
+                  success = success_code$poli_freedom)
+
+# join data frame to map
+pMap <- joinCountryData2Map(pDF, joinCode = "ISO3",
+                            nameJoinColumn = "country")
+
+# create map
+mapCountryData(pMap, nameColumnToPlot="success", catMethod = "quantiles",
+               missingCountryCol = gray(.8), mapTitle = "Poli Freedom of Nations")
+
+
+# repeat for econ freedom -------------------------------------------------
+
+# data frame with success and country code
+eDF <- data.frame(country = success_code$code, 
+                  success = success_code$econ_freedom)
+
+# join data frame to map
+eMap <- joinCountryData2Map(eDF, joinCode = "ISO3",
+                            nameJoinColumn = "country")
+
+# create map
+mapCountryData(eMap, nameColumnToPlot="success", catMethod = "quantiles",
+               missingCountryCol = gray(.8), mapTitle = "Econ Freedom of Nations")
+```
+
+# Most Successful Nations 
+
+
+
+# Least Successful Nations 
+
+# Success by Region 
+
+```{r echo=FALSE, results='hide',message=FALSE, warning=FALSE}
+# region data 
+colnames(success_na)
+unique(success_na$region)
+
+# calculate means for each region
+mean_ap <- 
+  mean(success_na$success[success_na$region == "Asia-Pacific"], na.rm = TRUE)
+mean_eu <-
+  mean(success_na$success[success_na$region == "Europe"], na.rm = TRUE)
+mean_mena <-
+  mean(success_na$success[success_na$region == "Middle East / North Africa"], na.rm = TRUE)
+mean_ssa <-
+  mean(success_na$success[success_na$region == "Sub-Saharan Africa"], na.rm = TRUE)
+mean_am <-
+  mean(success_na$success[success_na$region == "Americas"], na.rm = TRUE)
+
+# create a tibble of values
+df_region <- tibble("region" = c("Asia-Pacific", "Europe", 
+                               "Middle East / North Africa", 
+                               "Sub-Saharan Africa", "Americas"), 
+                  "mean" = c(mean_ap, mean_eu, mean_mena, mean_ssa, mean_am))
+```
+
+```{r}
+df_region
+```
+
+# Political Freedom and Success
+
+```{r echo=FALSE, results='hide',message=FALSE, warning=FALSE}
+# calculate means of proportions ------------------------------------------
+success_calc <- success_order
+
+# find success rates for each proportions
+suc0 <- success_calc$poli_freedom[success_calc$success == 0]
+suc1 <- success_calc$poli_freedom[success_calc$success < .1]
+suc2 <- success_calc$poli_freedom[success_calc$success < .2]
+suc3 <- success_calc$poli_freedom[success_calc$success < .3]
+suc4 <- success_calc$poli_freedom[success_calc$success < .4]
+suc5 <- success_calc$poli_freedom[(success_calc$success > .5)&(success_calc$success< .6)]
+suc6 <- success_calc$poli_freedom[(success_calc$success > .6)&(success_calc$success< .7)]
+suc7 <- success_calc$poli_freedom[(success_calc$success > .7)&(success_calc$success< .8)]
+suc8 <- success_calc$poli_freedom[(success_calc$success > .8)&(success_calc$success< .9)]
+suc9 <- success_calc$poli_freedom[(success_calc$success > .9)&(success_calc$success< 1.0)]
+
+# calculate means
+calc_mean <- c(mean(suc0), mean(suc1), mean(suc2), mean(suc3), mean(suc4),
+               mean(suc5), mean(suc6), mean(suc7), mean(suc8), 
+               mean(suc9)) 
+calc_mean
+
+# create tibbles with proportions
+mean_poli_prop <- 
+  tibble("prop_success" = c("0 - 0.1", "0.1 - 0.2", "0.2 - 0.3", 
+                            "0.3 - 0.4", "0.4 - 0.5", "0.5 - 0.6",
+                            "0.6 - 0.7", "0.7 - 0.8", "0.8 - 0.9",
+                            "0.9 - 1.0"),
+         "mean_success" = calc_mean)
+```
+
+```{r}
+mean_poli_prop
+```
+
+# Economic Freedom and Success
+
+```{r echo=FALSE, results='hide',message=FALSE, warning=FALSE}
+success_calc <- success_order
+
+# find success rates for each proportions
+xsuc1 <- success_calc$econ_freedom[(success_calc$success > .7)&(success_calc$success< .75)]
+xsuc2 <- success_calc$econ_freedom[(success_calc$success > .75)&(success_calc$success< .8)]
+xsuc3 <- success_calc$econ_freedom[(success_calc$success > .8)&(success_calc$success< .85)]
+xsuc4 <- success_calc$econ_freedom[(success_calc$success > .85)&(success_calc$success< .9)]
+xsuc5 <- success_calc$econ_freedom[(success_calc$success > .9)&(success_calc$success< .95)]
+xsuc6 <- success_calc$econ_freedom[(success_calc$success > .95)&(success_calc$success< 1.0)]
+
+# calculate means
+calc_mean <- c(mean(xsuc1), mean(xsuc2), mean(xsuc3), 
+               mean(xsuc4),mean(xsuc5), mean(xsuc6)) 
+calc_mean
+
+# create tibbles with proportions
+mean_econ_prop <- 
+  tibble("prop_success" = c("0.70 - 0.75", "0.75 - 0.80", "0.80 - 0.85", 
+                            "0.85 - 0.90", "0.90 - 0.95", "0.95 - 1.0"),
+         "mean_success" = calc_mean)
+```
+
+```{r}
+mean_econ_prop
+```
+
+# Overall Correlation between Freedom Type and Success
+
+```{r echo=FALSE, results='hide',message=FALSE, warning=FALSE}
+lm_both <- lm(success ~ econ_freedom + poli_freedom, data = success_na)
+```
+
+```{r}
+lm_both
+```
+
+
+# Determing the Effect of the Economic Prosperity Indicators 
+
+```{r echo=FALSE, results='hide',message=FALSE, warning=FALSE}
+# calculating success without economic indicators 
+
+# in order to ensure that success was not biased towards economic freedom 
+# as gdp and unemployment were both in the calculations of economic freedom 
+# and the success variables, need to calculate success removing the economic 
+# category to see if it has an effect on the linear regression 
+
+# check over data 
+head(success_data)
+colnames(success_data)
+
+# create a new tibble for percentages 
+success_four <- tibble("country_name" = success_data$country_name, 
+                      "region" = success_data$region)
+
+# add in the economic freedom data
+head(success_data$econ_freedom)
+success_four$econ_freedom <- success_data$econ_freedom / 100
+
+# add in the political freedom data 
+head(success_data$poli_freedom)
+success_four$poli_freedom <- success_data$poli_freedom / 100
+
+# add in the crime index data
+# since high crime index harms a country's success, we want to subtract 
+# the pct by 1 to find a positive idicator (i.e. the safety index)
+head(success_data$crime_index)
+success_four$crime_index <- 1 - (success_data$crime_index / 100)
+
+# add in the homicide rate data 
+# subtract by 1 to find a positive indicator 
+head(success_data$homicide)
+success_four$homicide <- 1 - (success_data$homicide / 100)
+
+# add in the enrollment data 
+head(success_data$enrollment)
+max_enrollment <- max(success_data$enrollment, na.rm = TRUE)
+success_four$enrollment <- success_data$enrollment / max_enrollment
+
+# add in the literacy data 
+head(success_data$literacy)
+success_four$literacy <- success_data$literacy / 100
+
+# add in the life expectancy data
+head(success_data$life_expectancy)
+max_life <- max(success_data$life_expectancy, na.rm = TRUE)
+success_four$life_expectancy <- success_data$life_expectancy / max_life
+
+# add in the infant mortality data 
+# subtract by 1 to find a positive indicator 
+head(success_data$infant_mortality)
+max_infant <- max(success_data$infant_mortality, na.rm = TRUE)
+success_four$infant_mortality <- 
+  1 - (success_data$infant_mortality / max_infant)
+
+# add in the median income data 
+head(success_data$median_income)
+max_income <- max(success_data$median_income, na.rm = TRUE)
+success_four$median_income <- success_data$median_income / max_income
+
+# add in the happiness rating data 
+head(success_data$happiness_rating)
+max_happiness <- max(success_data$happiness_rating, na.rm = TRUE)
+success_four$happiness <- success_data$happiness_rating / max_happiness
+
+# calculate the success rating for each country 
+# since many countries have at least one NA for their data, we cannot 
+# simply add the columns up and will instead need to find the mean
+ncol(success_four)
+colnames(success_four)
+
+success_four$success <- NA
+success_four$success <- rowMeans(success_four[,5:12], na.rm=TRUE)
+
+# remove rows that have NA for both variables in one category 
+
+# any country that is missing data for both variables in any of the 
+# categories needs to be removed
+success_four <- success_pct
+
+colnames(success_pct)
+
+success_four <- 
+  success_four[rowSums(is.na(success_four[c("gdp", "unemployment")])) != 2, ]
+success_four <- 
+  success_four[rowSums(is.na(success_four[c("crime_index", "homicide")])) != 2, ]
+success_four <- 
+  success_four[rowSums(is.na(success_four[c("enrollment", "literacy")])) != 2, ]
+success_four <- 
+  success_four[rowSums(is.na(success_four[c("life_expectancy", "infant_mortality")])) != 2, ]
+success_four <- 
+  success_four[rowSums(is.na(success_four[c("median_income", "happiness")])) != 2, ]
+
+# count number of remaining countries from the original 195 
+nrow(success_four)
+
+# run a new linear regression with only the four categories factored into 
+# the success score 
+
+lm_both_four <- lm(success ~ econ_freedom + poli_freedom, data = success_four)
+```
+
+```{r}
+lm_both_four
 ```

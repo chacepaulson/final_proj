@@ -34,4 +34,14 @@ success_bot2 <- tibble("country" = success_bot$country_name,
 success_top2 <- tibble("country" = success_top$country_name, 
                        "success" = success_top$success)
 
+# create tibbles keeping only countries and freedom/success scores
+success_bot3 <- tibble("country" = success_bot$country_name, 
+                       "econ" = success_bot$econ_freedom, 
+                       "poli" = success_bot$poli_freedom,
+                       "success" = success_bot$success)
+success_top3 <- tibble("country" = success_top$country_name, 
+                       "econ" = success_top$econ_freedom, 
+                       "poli" = success_top$poli_freedom, 
+                       "success" = success_top$success)
+
 
