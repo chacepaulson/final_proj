@@ -1410,6 +1410,8 @@ A futher calculation of linear regression reveals that while the relationship be
 
 # Economic Freedom and Success
 
+Following the same model that was utilized for political freedom, we will start by analzying the trends of economic freedom through proportional ranges. Below is a tibble of the results, with the first column denoting the ranges of economic freedom and the second showing the mean rate of success with the ranges: 
+
 ```{r echo=FALSE, results='hide',message=FALSE, warning=FALSE}
 success_calc <- success_order
 
@@ -1437,6 +1439,8 @@ lm_econ_f <- lm(success ~ econ_freedom, data = success_na)
 ```{r}
 mean_econ_prop
 ```
+
+While the data at first appears to be following an abnormal pattern, with the 0.90-0.95 range holding a lower mean rate of success than the 0.80-0.85 range, this can be explained by analyzing the data itself. The only nation to score an economic freedom rating within the range of 0.90-0.95 was Taiwan. Rather than a mean success rate calculated from dozens of nations, then, as the other proportional ranges do, the last range relies solely on one nation, creating a less realiable mean rate of success. Thus, excluding the outlier of Taiwan, the proportional ranges follow the same positive relationship as political freedom, with the success rate increasing as the economic freedom rate increases. 
 
 ## Correlation between Economic Freedom and Success
 
