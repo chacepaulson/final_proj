@@ -1034,7 +1034,7 @@ The paper will first detail which nations are ranked highest/lowest in terms of 
 
 # Background
 
-For the research, two data sets 
+For the research, two data sets were integral - the Heritage Foundation's Index of Economic Freedom and Freedom House's Freedom Rating. The former measures the degree of economic freedom in the world's nations through multivariate statistics and the latter measures the degree of civil liberties and political rights in the world's nations. 
 
 # Defining Success 
 
@@ -1262,10 +1262,67 @@ Under all three models, Europe is consistently the region with the highest avera
 
 # Most Successful Nations 
 
+The most successful nations are shown below: 
+```{r echo=FALSE, results='hide',message=FALSE, warning=FALSE}
+# basic statistics --------------------------------------------------------
+mean(success_na$success) 
+# 0.6117207
+
+min(success_na$success) 
+# 0.3012778
+
+success_na %>% top_n(-1) 
+# South Sudan
+
+max(success_na$success) 
+# 0.9071793
+
+success_na %>% top_n(1) 
+# Tawain 
+
+# find rank ---------------------------------------------------------------
+
+# arrange data by success
+success_order <- success_na %>% 
+  arrange(desc(success))
+nrow(success_order)
+success_order$rank <- 1:179
+
+# find the least successful countries
+success_bot <- success_na %>% top_n(-10)
+
+# find the most successful countries
+success_top <- success_na %>% top_n(10)
+
+# create tibbles keeping only countries and success scores
+success_bot2 <- tibble("country" = success_bot$country_name, 
+                       "success" = success_bot$success)
+success_top2 <- tibble("country" = success_top$country_name, 
+                       "success" = success_top$success)
+
+# create tibbles keeping only countries and freedom/success scores
+success_bot3 <- tibble("country" = success_bot$country_name, 
+                       "econ" = success_bot$econ_freedom, 
+                       "poli" = success_bot$poli_freedom,
+                       "success" = success_bot$success)
+success_top3 <- tibble("country" = success_top$country_name, 
+                       "econ" = success_top$econ_freedom, 
+                       "poli" = success_top$poli_freedom, 
+                       "success" = success_top$success)
+```
+
+```{r}
+success_top3
+```
 
 
 # Least Successful Nations 
 
+The least success nations are shown below: 
+
+```{r}
+success_bot3
+```
 
 # Political Freedom and Success
 
@@ -1468,3 +1525,66 @@ When testing the correlation between the five indicators and the success rate fo
 ```{r}
 lm_five
 ```
+
+# Data Limitations  
+
+While the ideal would have been to compare changes in success over the years, to analyze the effects that an increase in political freedom and economic freedom might have on a nation over time, this was not feasible due to the limitations of the data. Data reporting was infrequent from most nations, making it so that some variables had to be a combination of data from 2000 until 2017 to gain enough countries' results to make the set complete enough to work with. Thus, comparing the data over time was not feasible when the variables themselves were not individual years. Further, since a nation that was missing data from both variables within any of the given five categories had to be deleted from the set, this would create an even further lack of nations if the variables were considered by year, leaving only a handful of nations left. 
+
+Further limitations of the data may be the way by which success was measured. While the goal was to create a measure of success that was not biased in favor of any one category, the variables that were included could be considered a "westernized ideal of success", meaning that certain variables included may be important to how a western nation views success of their nation but may not be important to other regions of the world. While this is certainly not the goal of this measure of success and including items such as the World Happiness Rating was meant to eliminate some of these biases, it is a factor to consider when reviewing this report. 
+
+# Conculsion
+
+The United States has a tendency to assume that the political freedom of a nation factors much more heavily into the success of a nation than it actually does. While 
+
+# Sources 
+
+2018 Index of Economic Freedom. (2018). Retrieved from https://www.heritage.org/index/
+
+Adjusted net national income per capita (current US$). (2018). Retrieved from https://data.worldbank.org/indicator/NY.ADJ.NNTY.PC.CD. 
+
+Country Comparison: Infant Mortality Rate. (2018). Retrieved from https://www.cia.gov/library/publications/the-world-factbook/rankorder/2091rank.html. 
+
+Country Comparison: Life Expectancy at Birth. (2018). Retrieved from https://www.cia.gov/library/publications/the-world-factbook/rankorder/2102rank.html. 
+
+Country Comparison: Unemployment Rate. (2018). Retrieved from https://www.cia.gov/library/publications/the-world-factbook/rankorder/2129rank.html. 
+
+Crime Index for Country 2018 Mid-Year. (2018). Retrieved from https://www.numbeo.com/crime/rankings_by_country.jsp. 
+
+Field Listing: Literacy. (2018). Retrieved from https://www.cia.gov/library/publications/the-world-factbook/fields/print_2103.html. 
+
+Freedom in the World 2018. (2018). Retrieved from https://freedomhouse.org/report/freedom-world/freedom-world-2018. 
+
+GDP (current US$). (2018). Retrieved from https://data.worldbank.org/indicator/ny.gdp.mktp.cd?view=map. 
+
+H. Wickham. ggplot2: Elegant Graphics for Data Analysis.
+  Springer-Verlag New York, 2016.
+
+Hadley Wickham (2017). tidyverse: Easily Install and Load the
+  'Tidyverse'. R package version 1.2.1.
+  https://CRAN.R-project.org/package=tidyverse
+  
+Hadley Wickham and Jennifer Bryan (2018). readxl: Read Excel
+  Files. R package version 1.1.0.
+  https://CRAN.R-project.org/package=readxl
+
+Hadley Wickham, Romain François, Lionel Henry and Kirill Müller
+  (2018). dplyr: A Grammar of Data Manipulation. R package version
+  0.7.6. https://CRAN.R-project.org/package=dplyr
+
+Intentional homicides (per 100,000 people). Retrieved from https://data.worldbank.org/indicator/VC.IHR.PSRC.P5?year_high_desc=true. 
+R Core Team (2018). R: A language and environment for statistical
+  computing. R Foundation for Statistical Computing, Vienna,
+  Austria. URL https://www.R-project.org/.
+
+RStudio Team (2015). RStudio: Integrated Development for R. RStudio, Inc., Boston, MA URL http://www.rstudio.com/.
+
+School enrollment, secondary (% gross). (2018). Retrieved from https://data.worldbank.org/indicator/SE.SEC.ENRR. 
+
+South, Andy 2011 rworldmap: A New R package for Mapping Global
+  Data. The R Journal Vol. 3/1 : 35-43.
+
+Stefan Milton Bache and Hadley Wickham (2014). magrittr: A
+  Forward-Pipe Operator for R. R package version 1.5.
+  https://CRAN.R-project.org/package=magrittr
+
+World Happiness Report 2018. (2018). Retrieved from http://worldhappiness.report. 
