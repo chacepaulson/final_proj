@@ -1444,15 +1444,23 @@ While the data at first appears to be following an abnormal pattern, with the 0.
 
 ## Correlation between Economic Freedom and Success
 
+Turning the attention, then, towards the statistical relationship between economic freedom and success, we will start by analyzing a linear regression graph of the two. 
+
 ```{r}
 ggplot(data = success_na) + 
   geom_point(mapping = aes(x = econ_freedom, y = success)) +
   geom_abline()
 ```
 
+As the graph shows, there is a strong positive correlation between economic freedom and success. Unlike the graph of political freedom, where data points appeared to be more scattered and random, the graph of economic freedom follows a much clearer pattern, with only a handful of outliers. 
+
+Below is the linear regression equation for economic freedom and success:
+
 ```{r}
 lm_econ_f
 ```
+
+A futher calculation of linear regression reveals that the relationship between economic freedom and success is statistically significant (with a p value of < 2.2e-16). The correlation between the two is much stronger than that of political freedom and success, with a  correlation coefficient of 0.6862. This means that when the economic freedom rating is at 100, the success rate of a nation will rise (on average) 68.62 points. This rise in rate is over 50 points higher than that of political freedom. 
 
 # Overall Correlation between Freedom Type and Success
 
