@@ -1337,6 +1337,10 @@ The least success nations are shown below:
 success_bot3
 ```
 
+The first topic of note when considering the least successful nation is the lack of diversity in the regions represented. Only two regions - Sub-Saharan Africa and Asia-Pacific - appear in the bottom top nations whereas four different regions appeared in the top ten. 
+
+The mean rate of economic freedom for the bottom ten is 0.5257, compared to the mean economic freedom overall for the whole set which is 0.6126. The mean rate of political freedom for the bottom ten is 0.27, compared the mean political freedom overall which is 0.5809. 
+
 # Political Freedom and Success
 
 ```{r echo=FALSE, results='hide',message=FALSE, warning=FALSE}
