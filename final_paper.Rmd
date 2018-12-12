@@ -1325,6 +1325,9 @@ success_top3 <- tibble("country" = success_top$country_name,
 success_top3
 ```
 
+Of note when considering the top ten most successful nations in the world, the region fluctates much more than it does within the least successful. Four different regions are represented within the most successful nations - Europe, Middle East / North Africa, the Americas, and Asia-Pacific. Further, the rate of economic freedom is consistently high within the top ten. The mean rate of economic freedom for the top ten is 0.7783, compared to the average economic freedom rate for the whole data set which is 0.6126. While political freedom remains higher than the average for the whole data set, as well, with a mean of 0.841 for the top ten and 0.5809 for the entire set, there appears to be a much greater flucatation among the top ten in political freedom ratings. 
+
+In terms of economic freedom, the minimum economic freedom rating for the top ten is 0.726, which is still over 0.10 higher than the mean for the set. Political freedom, on the other hand, shows a much different pattern. The lowest political freedom rating among the top ten most successful nation is 0.24 for the nation of Qatar. This is over 0.3 lower than the mean for political freedom in the whole data set. Thus, it is through this portion of data, that we begin to see the closer correlation between economic freedom and success than exists between political freedom and success. 
 
 # Least Successful Nations 
 
