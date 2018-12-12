@@ -1034,7 +1034,9 @@ The paper will first detail which nations are ranked highest/lowest in terms of 
 
 # Background
 
-For the research, two data sets were integral - the Heritage Foundation's Index of Economic Freedom and Freedom House's Freedom Rating. The former measures the degree of economic freedom in the world's nations through multivariate statistics and the latter measures the degree of civil liberties and political rights in the world's nations. 
+While vast amounts of studies have been released on the effects of political freedom on economic freedom, or vice versa, few studies have attempted to track the effects of either on the overall success of the nation. Thus, well the relationship has been well established in which economic freedom increases political freedom, most studies ignore what role these two might play into other areas. 
+
+For the research, two data sets were integral - the Heritage Foundation's Index of Economic Freedom and Freedom House's Freedom Rating. The former measures the degree of economic freedom in the world's nations through multivariate statistics and the latter measures the degree of civil liberties and political rights in the world's nations. Both data sets are not without their critics; however, the goal is to eliminate some of the potential bias from the data sets through the research design. Hertiage's Index of Economic Freedom drew wide criticism due to its assumption that economic openness inherently leads to growth within a nation. By creating a new measure of success (as outlined below), the goal is to create a more rounded picture of what it means to be a successful nation within this study, including more than just economic indicators. 
 
 # Defining Success 
 
@@ -1046,10 +1048,18 @@ By including five different categories and weighting them evenly, the risk of pr
 
 # Calculating Success 
 
-To calculate success, proportions were calculated for each of the ten variables. 
+The first step in the research design was to decide which nations would be considered. The list of 196 nations currently recognized by the U.S. Department of State as sovereign was used as the standard measure - thereby eliminating any other countries or territories included in the data sets that were not included within this list. The data from the sovereign nations, economic freedom, political freedom, and the ten variables were then inputted in to R, tidied, and merged into one tibble. 
+
+The next step, then, was to calculate success from this tibble. Since variables came in the form of years, dollars, rates, percentages, etc., a standard measure needed to be utilized across all ten of the variable. In order to create this standard measures, proportions were utilized. Taking the maximum value for a variable (or the maximum possible in the case of the freedom scores and happiness rating), each value was divided by its column's maximum. For negative measures, such as homicide rate, where a lower value was ideal, the proportion was then divided by 1. The goal of this was to create a trend across all ten variables in which a higher value would denote more success in the category. The overall success rate was given, then, by calculating the mean of the ten variables for each nation. 
+
+In order to ensure that each category continued to be weighted evenly, the issue of missing values needed to be dealt with. Any nation that was missing data from both variables within any of the five categories was, thus, removed from consideration. This ensured that the mean rate that was given in the calculation of success actually represented all five categories rather than four or less. After removing rows (nations) with missing values in both columns of one category or more, 179 or the original 195 nations remained. 
+
+Nations were then reordered by their success rating and a rank was given to each nation. 
+
+The following tibble was created through this proccess:
 
 ```{r}
-head(success_na)
+head(success_order)
 ```
 
 # Comparing Economic/Political Freedom and Success 
